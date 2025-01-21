@@ -1,0 +1,177 @@
+<!-- <!DOCTYPE html>
+<html lang = "en">
+    <meta charset = "UTF-8">
+    <head>
+        <title> NER </title>
+        <link rel = "stylesheet" type = "text/css" href = "css/ner.css">
+    </head>
+    <body>
+        <h1>Named Entity Recognition</h1>
+        <form action = '/perform_ner' method = "post">
+            <label>Enter text</label><br>
+            <textarea name = "ner_text" required></textarea><br><br>
+            <input type = "submit" value = "Perform NER">
+        </form>
+        {% if response %}
+
+        {% for category, entities in response['entities'].items(): %}
+            for entity_info in entities:
+                <p>f"Entity: {entity_info['entity']}, Category: {category}, Score: {entity_info['score']}" + '\n'</p>
+        {% endfor %}
+        {% endif %}
+    </body> -->
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NER - Named Entity Recognition</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                padding: 20px;
+                background-color: #f4f4f9;
+            }
+    
+            h1 {
+                text-align: center;
+            }
+    
+            .category {
+                font-size: 20px;
+                margin-top: 20px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+    
+            .entity-item {
+                background-color: #ffffff;
+                padding: 10px;
+                margin: 5px 0;
+                border-radius: 8px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+    
+            .score-bar {
+                width: 80%;
+                height: 12px;
+                background-color: #ddd;
+                border-radius: 8px;
+                margin-top: 10px;
+            }
+    
+            .score-bar-inner {
+                height: 100%;
+                border-radius: 8px;
+            }
+    
+            .person {
+                background-color: #00aaff;
+            }
+    
+            .location {
+                background-color: #ff7043;
+            }
+    
+            .organization {
+                background-color: #8e24aa;
+            }
+    
+            .misc {
+                background-color: #4caf50;
+            }
+    
+            .entity-name {
+                font-weight: bold;
+            }
+    
+            .score {
+                color: #333;
+                font-weight: bold;
+            }
+    
+            .no-entities {
+                font-style: italic;
+                color: #888;
+            }
+    
+            /* Button and text box styles */
+            form {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+    
+            textarea {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+                border-radius: 8px;
+                border: 1px solid #ccc;
+                resize: vertical;
+            }
+    
+            input[type="submit"] {
+                background-color: #00aaff;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+    
+            input[type="submit"]:hover {
+                background-color: #0088cc;
+            }
+    
+            .output-container {
+                margin-top: 20px;
+            }
+    
+        </style>
+    </head>
+    <body>
+    
+        <h1>Named Entity Recognition</h1>
+    
+        <form action="/perform_ner" method="post">
+            <label for="ner_text">Enter text for NER:</label><br>
+            <textarea name="ner_text" id="ner_text" rows="6" required></textarea><br><br>
+            <input type="submit" value="Perform NER">
+        </form>
+    
+        {% if response %}
+            <div class="output-container">
+                <h2>NER Results:</h2>
+    
+                {% for category, entities in response['entities'].items() %}
+                    <div class="category">{{ category }}</div>
+    
+                    {% if entities %}
+                        {% for entity_info in entities %}
+                            <div class="entity-item {% if category == 'PERSON' %}person{% elif category == 'LOCATION' %}location{% elif category == 'ORGANIZATION' %}organization{% else %}misc{% endif %}">
+                                <div class="entity-name">{{ entity_info['name'] }}</div>
+                                <div class="score">{{ entity_info['score'] | round(2) }}</div>
+                            </div>
+    
+                            <div class="score-bar">
+                                <div class="score-bar-inner" style="width: {{ entity_info['score'] * 100 }}%;"></div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-entities">No entities found in this category.</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    
+    </body>
+    </html>
+    

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <meta charset = "UTF-8">
+    <head>
+        <title> NLP App | Login </title>
+        <link rel = "stylesheet" type = "text/css" href = "css/login.css">
+    </head>
+    <body>
+        <h1>NLP APP</h1>
+        <h3>Login here</h3>
+
+        {% if message %}
+            <p style = "color:green">{{ message }}</p>
+        {%endif%}
+        <form action = '/perform_login' method = "post">
+            <label>Email</label><br>
+            <input type = "email" name = "user_ka_email"><br>
+            <label>Password</label><br>
+            <input type = "password" name = "user_ka_password"><br><br>
+            <input type = "submit" value = "Login">
+        </form>
+           <p>Not a member? <a href = "/register"> Register Here </a></p>
+    </body>
+</html>
