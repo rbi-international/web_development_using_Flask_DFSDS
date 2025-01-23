@@ -68,3 +68,65 @@ project-folder/ ├── api.py # Implements the NER functionality using Huggin
    ```bash
    pip install -r requirements.txt
    ```
+
+3. Ensure `users.json` exists with initial user data. Example:
+    ```bash
+    {
+    "example@gmail.com": [
+        "Example User",
+        "password123"
+    ]
+    }
+    ```
+4. Update `settings.cfg` with your API key if required.
+       # Running the Application
+    1. Start the Flask application:
+    ```bash
+       python app.py
+    ```
+    2. Access the application in your browser at:
+    ```bash
+       http://127.0.0.1:5000
+    ```
+
+    `Usage`
+1. User Registration and Login
+2. Navigate to the home page.
+3. Register a new user by providing a name, email, and password.
+4. Login with the registered credentials.
+5. Named Entity Recognition (NER)
+6. After logging in, navigate to the NER page.
+7. Enter text into the provided input box.
+8. View extracted entities categorized by type.
+
+Technical Details
+NER Pipeline:
+
+The application uses the pipeline function from the `Hugging Face Transformers` library to implement `NER`.
+`Model: dbmdz/bert-large-cased-finetuned-conll03-english.`
+Entity Formatting:
+
+Entities are categorized into `PERSON`, `LOCATION`, `ORGANIZATION`, and `MISC`.
+Subword tokens are handled to ensure proper entity formatting.
+
+Session Management:
+
+Flask session is used to manage user authentication.
+Database:
+
+User data is stored in `users.json` as a simple JSON-based database.
+Dependencies
+Key dependencies include:
+
+`Flask`
+`Transformers`
+`Torch`
+
+Refer to requirements.txt for the full list.
+
+`The Project is still going on - Follow for more updates.`
+       
+
+
+
+
