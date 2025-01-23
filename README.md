@@ -89,7 +89,7 @@ project-folder/ ├── api.py # Implements the NER functionality using Huggin
        http://127.0.0.1:5000
     ```
 
-    `Usage`
+Usage
 1. User Registration and Login
 2. Navigate to the home page.
 3. Register a new user by providing a name, email, and password.
